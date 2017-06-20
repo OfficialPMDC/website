@@ -23,7 +23,7 @@ class ContestInfoPageView {
             return;
         }
         
-        $this->contentName = $contest->getName();
+        $this->contestName = $contest->getName();
         
         require_once INSTALL_PATH . "/includes/header.php";
         ?>

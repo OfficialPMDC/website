@@ -6,23 +6,26 @@ use pmdc\Main;
 
 class ContestInfoPageView {
     private $main;
+    private $contestName;
 
     public function __construct(Main $main) {
         $this->main = $main;
     }
     
     public function getTitle(): string {
-        return "Contest // PocketMine Development Contest";
+        return $this->contestName . " // PocketMine Development Contest";
     }
     
-    public function init(int $id) {
-        require_once INSTALL_PATH . "/includes/header.php";
-        
+    public function init(int $id) {  
         $contest = Main::getInstance()->getContestManager()->getContest($id);
         if($contest === null) {
             echo "unknown contest";
             return;
         }
+        
+        $this->contentName = $contest->getName();
+        
+        require_once INSTALL_PATH . "/includes/header.php";
         ?>
         <div class="jumbotron jumbotron-fluid mb-xl">
             <div class="container">

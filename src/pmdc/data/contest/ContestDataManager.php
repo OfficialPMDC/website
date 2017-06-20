@@ -16,8 +16,8 @@ class ContestDataManager {
     private function load() {
         $directory = DATA_PATH . "/contests/";
         foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory)) as $file => $contests) {
-            if(is_file($file) && pathinfo($file)[$extension] === "json") {
-                $contests = json_decode(file_get_contents($contests), true);
+            $contests = json_decode(file_get_contents($contests), true);
+            if(is_array($contests)) {
                 $contest = new Contest($contests);
                 $this->contests[$contest->getId()] = $contest;
             }
@@ -32,6 +32,10 @@ class ContestDataManager {
         }
     }
     
+    public function getContests(): array {
+        return $this->contests;
+    }
+    
     /**
      * Creates a new contest.
      *
@@ -39,7 +43,7 @@ class ContestDataManager {
      * @param array   $data
      */
     public function addContest(Contest $contest, array $data) {
-        file_put_contents(DATA_PATH . "/" . $contest->getId() . ".json" . json_encode($data));
+        file_put_contents(DATA_PATH . "/contests/" . $contest->getId() . ".json", json_encode($data));
         $this->contests[$contest->getId()] = $contest;
     }
 }

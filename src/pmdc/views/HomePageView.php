@@ -5,10 +5,10 @@ namespace pmdc\views;
 use pmdc\Main;
 
 class HomePageView {
-    private $metrics;
+    private $main;
 
-    public function __construct(Main $metrics) {
-        $this->metrics = $metrics;
+    public function __construct(Main $main) {
+        $this->main = $main;
     }
     
     public function getTitle(): string {

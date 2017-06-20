@@ -7,9 +7,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="index.php">Home</a>
-                <a class="nav-item nav-link" href="#">Contests</a>
-                <a class="nav-item nav-link" href="#">Enter</a>
-                <a class="nav-item nav-link" href="#">Login</a>
+                <a class="nav-item nav-link" href="index.php?page=contests">Contests</a>
+                <a class="nav-item nav-link" href="index.php?page=enter">Enter</a>
+                <a class="nav-item nav-link" href="index.php?page=login">Login</a>
             </div>
         </div>
     </nav>

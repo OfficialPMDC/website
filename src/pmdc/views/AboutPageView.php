@@ -5,10 +5,10 @@ namespace pmdc\views;
 use pmdc\Main;
 
 class AboutPageView {
-    private $metrics;
+    private $main;
 
-    public function __construct(Main $metrics) {
-        $this->metrics = $metrics;
+    public function __construct(Main $main) {
+        $this->main = $main;
     }
     
     public function getTitle(): string {
@@ -18,6 +18,11 @@ class AboutPageView {
     public function init() {
         require_once INSTALL_PATH . "/includes/header.php";
         ?>
+        <div class="jumbotron jumbotron-fluid mb-xl">
+            <div class="container">
+                <h1>About</h1>
+            </div>
+        </div>
         <div class="container">
             <br>
             <div class="card">

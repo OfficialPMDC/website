@@ -11,15 +11,32 @@ class Contest {
         $this->data = $data;
     }
     
-    public function getId() {
+    public function getId(): int {
         return $this->data["id"];
     }
     
-    public function isRunning() {
+    public function getName(): string {
+        return $this->data["name"];
+    }
+    
+    public function getShortDescription() {
+        return $this->data["short-description"];
+    }
+    
+    public function getDescription(): string {
+        return $this->data["description"];
+    }
+    
+    // TODO: make the rules an array before release
+    public function getRules(): string {
+        return $this->data["rules"];
+    }
+    
+    public function isRunning(): bool {
         return $this->data["state"] === "open";
     }
     
-    public function getTheme() {
+    public function getTheme(): string {
         return $this->data["theme"];
     }
     

@@ -8,12 +8,18 @@ use pmdc\views\admin\AdminPageView;
 use pmdc\views\admin\CreateContestPageView;
 use pmdc\views\ContestInfoPageView;
 use pmdc\views\ContestsPageView;
+use pmdc\views\EnterPageView;
 use pmdc\views\HomePageView;
 use pmdc\views\LoginPageView;
+
+use pmdc\utils\SessionUtils;
 
 use pmdc\api\v1\SiteAPI;
 
 class Main { 
+    public static $ACCESS;
+    public static $CLIENT_ID;
+    
     public static $instance;
     
     /** @var ContestDataManager */
@@ -30,8 +36,13 @@ class Main {
     public function start() {
         self::$instance = $this;
         
+        self::$CLIENT_ID = str_replace('"', "", base64_decode("ImVhZjI3NGFhNzJiMDY4ZDI2YjQzIg=="));
+        self::$ACCESS = str_replace('"', "", base64_decode("VGhlRGlhbW9uZFlUMQ=="));
+        
         $this->contestManager = new ContestDataManager();
         $this->contestManager->init();
+        
+        (new SessionUtils())->init();
         
         if(empty($_GET)) {
             $home = new HomePageView($this);
@@ -55,6 +66,10 @@ class Main {
                }
                echo "unknown contest";
                break;
+           case "enter":
+               $enter = new EnterPageView($this);
+               $enter->init();
+               break;
            case "login":
                $login = new LoginPageView($this);
                $login->init();
@@ -77,6 +92,11 @@ class Main {
                $api->init();
                break;
         }
+    }
+    
+    public static function getSecret($key) {
+        $file = yaml_parse_file(INSTALL_PATH . "/config.yml");
+        return $file[$key];
     }
     
     public function getContestManager() {

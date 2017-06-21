@@ -3,9 +3,11 @@
 namespace pmdc\data\contest;
 
 use pmdc\entity\Contest;
+use pmdc\entity\Submission;
 
 class ContestDataManager {
     private $contests = [];
+    private $submissions = [];
 
     public function init() {
         @mkdir(DATA_PATH);
@@ -43,7 +45,14 @@ class ContestDataManager {
      * @param array   $data
      */
     public function addContest(Contest $contest, array $data) {
-        file_put_contents(DATA_PATH . "/contests/" . $contest->getId() . ".json", json_encode($data));
+        file_put_contents(DATA_PATH . "/contests/" . $contest->getId() . ".json", json_encode($data, JSON_PRETTY_PRINT));
         $this->contests[$contest->getId()] = $contest;
+    }
+    
+    public function addSubmission(Submission $project, array $data) {
+        $contest = $project->getContest();
+        
+        file_put_contents(DATA_PATH . "/contests/" . $contest->getId() . ".json", json_encode(array_merge($contest->getData(), $data), JSON_PRETTY_PRINT));
+        $this->submissions[$project->getCreator()] = $project;
     }
 }

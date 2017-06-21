@@ -11,6 +11,10 @@ class Contest {
         $this->data = $data;
     }
     
+    public function getData() {
+        return $this->data;
+    }
+    
     public function getId(): int {
         return $this->data["id"];
     }
@@ -38,6 +42,10 @@ class Contest {
     
     public function getTheme(): string {
         return $this->data["theme"];
+    }
+    
+    public function getSubmissions() {
+        return $this->data["submissions"];
     }
     
     /**
